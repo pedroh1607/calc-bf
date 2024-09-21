@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculara de calorias</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+        }
+        body{
+            background: linear-gradient(#33afd4, #4c00ff);
+        }
+        section {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .inputs{
+            width: 300px;
+            height: auto;
+
+        }
+        p {
+            background: #ffffff;
+        }
+
+    </style>
+</head>
+
+<body>
+    <section>
+        <header>
+            <h1>Calculate your fat percentage</h1>
+        </header>
+        
+        <div class="inputs">
+            <input class="inputs" type="text" id="input_idade"         placeholder="input your age here">
+            <input class="inputs" type="text" id="input_triceps"       placeholder="input your triceps measure here" >
+            <input class="inputs" type="text" id="input_suprailiaco"   placeholder="input your suprailiac measure here">
+            <input class="inputs" type="text" id="input_abdomem"       placeholder="input your abdomen measure here">
+            <input class="inputs" type="text" id="input_peitoral"      placeholder="input your breastplate measure here">
+            <input class="inputs" type="text" id="input_axilar"        placeholder="input your axillary measure here">
+            <input class="inputs" type="text" id="input_subescapular"  placeholder="input your subscapularis measure here">
+            <input class="inputs" type="text" id="input_coxa"          placeholder="input your thigh measure here">
+        </div>
+
+        <button class="cauculo" onclick="pegarValor()">
+            caucular
+        </button>
+
+        <div class="resultado_male">
+            <p>male</p>
+            <p id="p_total_h"></p>
+        </div>
+
+        <div class="resultado_female">
+            <p>female</p>
+            <p id="p_total_m"></p>
+        </div>
+
+    <script>
+        function pegarValor() {
+            let Idade =         parseFloat(document.getElementById('input_idade').value);
+            let Triceps =       parseFloat(document.getElementById('input_triceps').value);
+            let Suprailiaco =   parseFloat(document.getElementById('input_suprailiaco').value);
+            let Abdomem =       parseFloat(document.getElementById('input_abdomem').value);
+            let Peitoral =      parseFloat(document.getElementById('input_peitoral').value);
+            let Axiliar =       parseFloat(document.getElementById('input_axilar').value);
+            let Subscapular =   parseFloat(document.getElementById('input_subescapular').value);
+            let Coxas =         parseFloat(document.getElementById('input_coxa').value);
+            
+            var soma_das_dobras =  Triceps + Suprailiaco + Abdomem + Peitoral + Axiliar + Subscapular + Coxas ;
+            
+            var result_h_7_pts = 1.10938 - 0.0008267 * soma_das_dobras + 0.0000016 * soma_das_dobras**2 - 0.0002574 * Idade;  
+            var result_m_7_pts = 1.097 - 0.0008167 * soma_das_dobras + 0.0000012 * soma_das_dobras**2 - 0.0000026 * Idade;
+
+            console.log(Idade);
+            console.log(result_h_7_pts);
+            console.log(result_m_7_pts);
+            
+            document.getElementById('p_total_h').innerHTML = result_h_7_pts;
+            document.getElementById('p_total_m').innerHTML = result_m_7_pts;
+        }
+
+    </script>
+    </section>
+</body>
+</html>
