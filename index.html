@@ -8,6 +8,7 @@
         *{
             padding: 0;
             margin: 0;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
         body, html {
             margin: 0;
@@ -26,20 +27,60 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            gap: 20px;
         }
         div{
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            
         }
-        .inputs{
+        .inputs_div{
+            display: flex;
             width: 300px;
             height: auto;
+            gap: 10px;
 
         }
-        p {
+        .inputs, .calculo{
+            width: auto;
+            height: 30px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 1.2rem;
+        }
+        .inputs{
+            width: 130%;
+        }
+        
+        .resultado{
             background: #ffffff;
+            display:flex;
+            width: 250px;
+            height: 50px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 1.2rem;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .cabecalho_result{
+            background: #bdbaba;
+            width: 100%;
+            height: 100%;
+            border:none;
+            border-radius: 5px;
+
+        }
+        .resultados{
+
+            gap: 30px;
         }
 
     </style>
@@ -50,8 +91,8 @@
         <header>
             <h1>Calculate your fat percentage</h1>
         </header>
-        
-        <div class="inputs">
+
+        <div class="inputs_div">
             <input class="inputs" type="text" id="input_idade"         placeholder="input your age here">
             <input class="inputs" type="text" id="input_triceps"       placeholder="input your triceps measure here" >
             <input class="inputs" type="text" id="input_suprailiaco"   placeholder="input your suprailiac measure here">
@@ -62,20 +103,30 @@
             <input class="inputs" type="text" id="input_coxa"          placeholder="input your thigh measure here">
         </div>
 
-        <button class="cauculo" onclick="pegarValor()">
-            caucular
+        <button class="calculo" onclick="pegarValor()">
+            calculate
         </button>
 
-        <div class="resultado_male">
-            <p>male</p>
-            <p id="p_total_h"></p>
-        </div>
+        <div class="resultados">
+        
+            <div class="resultado">
+                <div class="cabecalho_result">    
+                    <p>male</p>
+                </div>
+                
+                <p id="p_total_h">resultado:</p>
+            </div>
+            
+            <div class="resultado">
+                <div class="cabecalho_result">
+                    <p>female</p>
+                </div>
+                
+                <p id="p_total_m"> resultado :</p>
+            </div>
 
-        <div class="resultado_female">
-            <p>female</p>
-            <p id="p_total_m"></p>
         </div>
-
+            
     <script>
         function pegarValor() {
             let Idade =         parseFloat(document.getElementById('input_idade').value);
@@ -86,16 +137,16 @@
             let Axiliar =       parseFloat(document.getElementById('input_axilar').value);
             let Subscapular =   parseFloat(document.getElementById('input_subescapular').value);
             let Coxas =         parseFloat(document.getElementById('input_coxa').value);
-            
+
             var soma_das_dobras =  Triceps + Suprailiaco + Abdomem + Peitoral + Axiliar + Subscapular + Coxas ;
-            
+
             var result_h_7_pts = 1.10938 - 0.0008267 * soma_das_dobras + 0.0000016 * soma_das_dobras**2 - 0.0002574 * Idade;  
             var result_m_7_pts = 1.097 - 0.0008167 * soma_das_dobras + 0.0000012 * soma_das_dobras**2 - 0.0000026 * Idade;
 
             console.log(Idade);
             console.log(result_h_7_pts);
             console.log(result_m_7_pts);
-            
+
             document.getElementById('p_total_h').innerHTML = result_h_7_pts;
             document.getElementById('p_total_m').innerHTML = result_m_7_pts;
         }
